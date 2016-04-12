@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ThreadOS">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../CSS_430/ThreadOS" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../CSS_430/ThreadOS" />
+    </SOURCES>
+  </library>
+</component>
