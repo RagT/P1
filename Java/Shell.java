@@ -1,7 +1,7 @@
 class Shell extends Thread
 {
-	// required run method for this Shell Thread
-	public void run( ) {
+    // required run method for this Shell Thread
+    public void run( ) {
 
         boolean running = true;
 
@@ -17,11 +17,11 @@ class Shell extends Thread
             }
         }
 
-		// wait for completion then exit back to ThreadOS
-		SysLib.join();
-		SysLib.cout("Done!\n");
-		SysLib.exit();
-	}
+        // wait for completion then exit back to ThreadOS
+        SysLib.join();
+        SysLib.cout("Done!\n");
+        SysLib.exit();
+    }
 
     //Checks for exit code to terminate shell
     private boolean checkExit(String cmd) {
@@ -38,30 +38,30 @@ class Shell extends Thread
         }
     }
 
-   private void executeCmdLine(String cmdLine){
-       String[] delimSemi = cmdLine.split(";");
-       String[] delimAmp = cmdLine.split("&");
-       if(delimSemi.length > 1) {
-           sequentialExe(delimSemi);
-       }
-       else if(delimAmp.length > 1) {
-           parallelExe(delimAmp);
-       } else if(delimSemi.length == 1 && delimAmp.length == 1) {
-           execute(cmdLine);
-       }
-   }
+    private void executeCmdLine(String cmdLine){
+        String[] delimSemi = cmdLine.split(";");
+        String[] delimAmp = cmdLine.split("&");
+        if(delimSemi.length > 1) {
+            sequentialExe(delimSemi);
+        }
+        else if(delimAmp.length > 1) {
+            parallelExe(delimAmp);
+        } else if(delimSemi.length == 1 && delimAmp.length == 1) {
+            execute(cmdLine);
+        }
+    }
 
-   //Sequentially runs commands provided in cmds array
-   private void sequentialExe(String[] cmds){
-       for(String cmd : cmds) {
-           String[] delimAmp = cmd.split("&");
-           if(delimAmp.length > 1) {
-               parallelExe(delimAmp);
-           } else {
-               execute(cmd);
-           }
-       }
-   }
+    //Sequentially runs commands provided in cmds array
+    private void sequentialExe(String[] cmds){
+        for(String cmd : cmds) {
+            String[] delimAmp = cmd.split("&");
+            if(delimAmp.length > 1) {
+                parallelExe(delimAmp);
+            } else {
+                execute(cmd);
+            }
+        }
+    }
 
     //Concurrently runs programs specified in cmds array
     private void parallelExe(String[] cmds) {
