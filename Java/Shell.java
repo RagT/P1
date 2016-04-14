@@ -1,31 +1,25 @@
 class Shell extends Thread
 {
+    public Shell() {}
+    public Shell(String[] args) {}
+
     // required run method for this Shell Thread
     public void run( ) {
-
-        boolean running = true;
-
-        for(int count = 1; running; count++) {
-            SysLib.cout("shell[" + count + "]%\n");
+        int count = 1;
+        while(true) {
             StringBuffer buff = new StringBuffer();
+            SysLib.cout("Shell[" + count + "]% ");
             SysLib.cin(buff);
-            String command = buff.toString();
-            running = checkExit(command); //Check if exit is inputted
-
-            if(running) {
-                executeCmdLine(command);
+            String command = new String(buff);
+            if(command.compareTo("exit") == 0) {
+                break;
             }
+            executeCmdLine(command);
+            count++;
         }
 
-        // wait for completion then exit back to ThreadOS
-        SysLib.join();
         SysLib.cout("Done!\n");
         SysLib.exit();
-    }
-
-    //Checks for exit code to terminate shell
-    private boolean checkExit(String cmd) {
-        return cmd.compareTo("exit") == 0;
     }
 
     // Takes in a string that contains a single command to execute and carries it out.
@@ -46,7 +40,7 @@ class Shell extends Thread
         }
         else if(delimAmp.length > 1) {
             parallelExe(delimAmp);
-        } else if(delimSemi.length == 1 && delimAmp.length == 1) {
+        } else {
             execute(cmdLine);
         }
     }
